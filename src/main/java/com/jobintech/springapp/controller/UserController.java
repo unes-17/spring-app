@@ -1,8 +1,10 @@
 package com.jobintech.springapp.controller;
 
 import com.jobintech.springapp.entities.User;
+import com.jobintech.springapp.repository.UserRepository;
 import com.jobintech.springapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,5 +36,17 @@ public class UserController {
     public User allUsers(@PathVariable long id){
         return userService.getUserById(id);
     }*/
+
+    @PutMapping("/{id}")
+    public ResponseEntity updateClient(@PathVariable Long id, @RequestBody User user) {
+        User currentUser = userService.getUserById(id);
+        currentUser.setFirstName(user.getFirstName());
+        currentUser.setLastName(user.getLastName());
+        currentUser.setEmail(user.getEmail());
+        currentUser.setPhoneNum(user.getPhoneNum());
+        currentUser = userService.update(currentUser);
+
+        return ResponseEntity.ok(currentUser);
+    }
 
 }
