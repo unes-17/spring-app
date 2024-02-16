@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -32,10 +36,11 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    /*@GetMapping("/users/{id}")
-    public User allUsers(@PathVariable long id){
-        return userService.getUserById(id);
-    }*/
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteClient(@PathVariable Long id) {
+        userService.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity updateClient(@PathVariable Long id, @RequestBody User user) {
@@ -44,6 +49,22 @@ public class UserController {
         currentUser.setLastName(user.getLastName());
         currentUser.setEmail(user.getEmail());
         currentUser.setPhoneNum(user.getPhoneNum());
+        currentUser.setCreatedAt(user.getCreatedAt());
+        currentUser.setEnabled(user.isEnabled());
+        currentUser.setCountry(user.getCountry());
+        currentUser.setCity(user.getCity());
+        currentUser.setUsername(user.getUsername());
+        currentUser.setUpdatedAt(new Date());
+        currentUser.setAddress(user.getAddress());
+        currentUser.setRoles(user.getRoles());
+        currentUser.setDateOfBirth(user.getDateOfBirth());
+        currentUser.setGender(user.getGender());
+        currentUser.setPostalCode(user.getPostalCode());
+        currentUser.setPassword(user.getPassword());
+        currentUser.setProfilePicture(user.getProfilePicture());
+        currentUser.setResetPasswordToken(user.getResetPasswordToken());
+        currentUser.setVerificationToken(user.getVerificationToken());
+
         currentUser = userService.update(currentUser);
 
         return ResponseEntity.ok(currentUser);
