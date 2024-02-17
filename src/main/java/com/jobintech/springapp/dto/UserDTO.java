@@ -3,7 +3,7 @@ package com.jobintech.springapp.dto;
 import lombok.Data;
 
 @Data
-public class userDTO {
+public class UserDTO {
 
     private long id;
     private String email;

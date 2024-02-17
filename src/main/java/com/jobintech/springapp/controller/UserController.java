@@ -1,15 +1,12 @@
 package com.jobintech.springapp.controller;
 
+import com.jobintech.springapp.dto.UserDTO;
 import com.jobintech.springapp.entities.User;
-import com.jobintech.springapp.repository.UserRepository;
 import com.jobintech.springapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -21,19 +18,29 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/save")
-    public User userSave(@RequestBody User user){
+    public User userSave(@RequestBody User user) {
 
         return userService.create(user);
     }
 
     @GetMapping("/users")
-    public List<User> allUsers(){
+    public List<User> allUsers() {
         return userService.getAllUsers();
     }
 
+    @GetMapping("/userbydto")
+    public List<UserDTO> getAllUsers() {
+        return userService.getAllUsersDTO();
+    }
+
     @GetMapping("/users/{id}")
-    public User allUsers(@PathVariable long id){
+    public User allUsers(@PathVariable long id) {
         return userService.getUserById(id);
+    }
+
+    @GetMapping("/userbydto/{id}")
+    public UserDTO getUserByDTO(@PathVariable long id) {
+        return userService.getUserDTO(id);
     }
 
     @DeleteMapping("/{id}")

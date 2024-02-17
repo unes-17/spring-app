@@ -1,5 +1,6 @@
 package com.jobintech.springapp.service;
 
+import com.jobintech.springapp.dto.UserDTO;
 import com.jobintech.springapp.entities.User;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +14,12 @@ public interface UserService {
 
     List<User> getAllUsers();
 
+    List<UserDTO> getAllUsersDTO();
+
     User getUserById(long id);
 
     void deleteById(Long id);
+
+    UserDTO getUserDTO(long id);
 }
 
