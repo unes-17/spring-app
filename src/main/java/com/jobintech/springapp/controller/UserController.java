@@ -3,6 +3,7 @@ package com.jobintech.springapp.controller;
 import com.jobintech.springapp.dto.UserDTO;
 import com.jobintech.springapp.entities.User;
 import com.jobintech.springapp.service.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,11 +12,14 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("api/v1/users")
 public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    ModelMapper modelMapper;
 
     @PostMapping("/save")
     public User userSave(@RequestBody User user) {
@@ -77,4 +81,18 @@ public class UserController {
         return ResponseEntity.ok(currentUser);
     }
 
+/*
+    @PutMapping("2/{id}")
+    public ResponseEntity updateClient2(@PathVariable Long id, @RequestBody User user) {
+
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+
+        User currentUser = userService.getUserById(id);
+
+        user = modelMapper.map(user, User.class);
+        currentUser = userService.update(currentUser);
+
+        return ResponseEntity.ok(currentUser);
+    }
+*/
 }
