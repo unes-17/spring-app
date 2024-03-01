@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -27,7 +28,15 @@ public class Course {
 
     @Temporal(TemporalType.DATE)
     private Date endDate;
+
     @ManyToOne
     private User expert;
+
+    @OneToMany(mappedBy = "course")
+    private List<Step> steps;
+//    @ManyToMany(mappedBy = "courses")
+//    private List<User> users;
+
+
 
 }

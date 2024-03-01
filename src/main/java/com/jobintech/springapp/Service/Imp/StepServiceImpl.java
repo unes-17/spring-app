@@ -3,6 +3,7 @@ package com.jobintech.springapp.Service.Imp;
 import com.jobintech.springapp.Model.Step;
 import com.jobintech.springapp.Repository.StepRepository;
 import com.jobintech.springapp.Service.StepService;
+import com.jobintech.springapp.exceptions.NoSuchElementFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class StepServiceImpl implements StepService {
     @Override
     public Step update(Long id, Step stepNew) {
         Step step =stepRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Step not found with id : " + id));
+                .orElseThrow(() -> new NoSuchElementFoundException("Step not found with id : " + id));
         step.setTitle(stepNew.getTitle());
         step.setDescription(stepNew.getDescription());
 

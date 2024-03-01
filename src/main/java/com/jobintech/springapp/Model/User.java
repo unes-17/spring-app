@@ -6,8 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Data
@@ -31,6 +30,18 @@ public class User {
 
     @OneToMany(mappedBy = "expert")
     private List<Course> ListCourses;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Course> courses=new HashSet<>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Step> steps=new HashSet<>();
+
+
+
+
+
+
 
 
 }

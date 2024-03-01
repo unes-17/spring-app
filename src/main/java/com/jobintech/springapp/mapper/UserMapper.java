@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class UserMapper {
     @Autowired
     ModelMapper modelMapper;
-       public UserDto userToUserDto(User user) {
+    public UserDto userToUserDto(User user) {
         return modelMapper.map(user, UserDto.class);
     }
 

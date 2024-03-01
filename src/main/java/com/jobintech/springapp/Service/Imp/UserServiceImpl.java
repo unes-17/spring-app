@@ -4,6 +4,7 @@ import com.jobintech.springapp.DTO.UserDto;
 import com.jobintech.springapp.Model.User;
 import com.jobintech.springapp.Repository.UserRepository;
 import com.jobintech.springapp.Service.UserService;
+import com.jobintech.springapp.exceptions.NoSuchElementFoundException;
 import com.jobintech.springapp.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User update(Long id, User userNew) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found with id : " + id));
+                .orElseThrow(() -> new NoSuchElementFoundException("User not found with id : " + id));
         user.setUsername(userNew.getUsername());
         user.setEmail(userNew.getEmail());
         user.setPassword(userNew.getPassword());
@@ -70,7 +71,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto updateDto(Long id, UserDto userDto) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found with id : " + id));
+                .orElseThrow(() -> new NoSuchElementFoundException("User not found with id : " + id));
 
         userMapper.updateUserFromDto(userDto, user);
         user = userRepository.save(user);

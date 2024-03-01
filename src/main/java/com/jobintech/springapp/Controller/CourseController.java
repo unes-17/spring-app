@@ -1,5 +1,6 @@
 package com.jobintech.springapp.Controller;
 
+import com.jobintech.springapp.DTO.CourseDto;
 import com.jobintech.springapp.Model.Course;
 import com.jobintech.springapp.Service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,10 @@ public class CourseController {
         return courseService.create(course);
     }
 
-    @PostMapping("/save/{expertId}")
-    public ResponseEntity<Course> createCourse(@PathVariable Long expertId, @RequestBody Course course) {
-        return ResponseEntity.ok(courseService.createCourse(course, expertId));
-    }
+//    @PostMapping("/save/{expertId}")
+//    public ResponseEntity<Course> createCourse(@PathVariable Long expertId, @RequestBody Course course) {
+//        return ResponseEntity.ok(courseService.createCourse(course, expertId));
+//    }
 
 
 
@@ -51,4 +52,25 @@ public class CourseController {
             return ResponseEntity.notFound().build();
         }
     }
+
+
+    ////DTO
+    @PostMapping("/v1/save")
+    public ResponseEntity<CourseDto> createDto(@RequestBody CourseDto courseDto) {
+        CourseDto createdCourseDto = courseService.createDto(courseDto);
+        return ResponseEntity.ok(createdCourseDto);
+    }
+
+    @PutMapping("/v1/{id}")
+    public ResponseEntity<CourseDto> updateDto(@PathVariable Long id, @RequestBody CourseDto courseDto) {
+        CourseDto updatedCourseDto = courseService.updateDto(id, courseDto);
+        return ResponseEntity.ok(updatedCourseDto);
+    }
+
+    @GetMapping("/v1/users")
+    public ResponseEntity<List<CourseDto>> getAllCoursesDto() {
+        List<CourseDto> courseDto = courseService.getAllCoursesDto();
+        return ResponseEntity.ok(courseDto);
+    }
+
 }
